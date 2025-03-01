@@ -5,4 +5,5 @@ plugins {
     alias(libs.plugins.hilt.android) apply false
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.firebase.service) apply false
 }
