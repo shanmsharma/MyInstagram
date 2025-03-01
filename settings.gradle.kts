@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyInstagram"
 include(":app")
- 
+include(":authentication")
