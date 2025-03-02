@@ -1,4 +1,4 @@
-package com.sharma.authentication.ui
+package com.sharma.authentication.ui.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +12,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -22,15 +23,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.sharma.common.Screen
 
 @Composable
-fun LoginScreen(viewModel: AuthViewModel =  hiltViewModel()) {
+fun LoginScreen(viewModel: LoginViewModel = hiltViewModel(), navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val loginState by viewModel.authState.collectAsState()
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -67,8 +72,18 @@ fun LoginScreen(viewModel: AuthViewModel =  hiltViewModel()) {
         ) {
             Text("Login")
         }
-    }
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // "Create Account" button
+        TextButton(
+            onClick = { navController.navigate(Screen.SignUp.route) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Create Account", color = MaterialTheme.colorScheme.primary)
+        }
+    }
 }
+
 
 

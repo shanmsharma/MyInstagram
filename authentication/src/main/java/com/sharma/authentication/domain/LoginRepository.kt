@@ -1,5 +1,5 @@
 package com.sharma.authentication.domain
 
-interface AuthRepository {
+interface LoginRepository {
     suspend fun login(email: String, password: String): Result<Boolean>
 }

@@ -1,12 +1,13 @@
 package com.sharma.authentication.data.repository
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.sharma.authentication.domain.AuthRepository
+import com.sharma.authentication.domain.LoginRepository
+import com.sharma.authentication.domain.SignUpRepository
 import kotlinx.coroutines.tasks.await
 
-class AuthRepositoryImpl(private val firebaseAuth:FirebaseAuth) : AuthRepository {
-    override suspend fun login(email: String, password: String): Result<Boolean> {
+
+class SignUpRepositoryImpl(private val firebaseAuth: FirebaseAuth) : SignUpRepository {
+    override suspend fun signUp(email: String, password: String): Result<Boolean> {
         return try {
             firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             Result.success(true)
