@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.sharma.common"
+    namespace = "com.sharma.authentication"
     compileSdk = 34
 
     defaultConfig {
@@ -35,7 +35,12 @@ android {
     kotlinOptions {
         jvmTarget = "17" // ✅ Ensure Kotlin uses Java 17
     }
-
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.7"
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -49,11 +54,26 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
-    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.8.1")
-    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+
+    implementation(libs.hilt.navigation.compose)
 
     implementation(libs.hilt.android)
+
     kapt(libs.hilt.compiler)
+
+    implementation(libs.firebase.auth)
+    implementation("com.google.firebase:firebase-firestore-ktx:24.8.1") // Firestore
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0") // Firebase Storage
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(project(":common"))
 
 }

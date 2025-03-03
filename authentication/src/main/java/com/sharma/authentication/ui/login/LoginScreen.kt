@@ -14,6 +14,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,13 @@ fun LoginScreen(viewModel: LoginViewModel = hiltViewModel(), navController: NavC
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val loginState by viewModel.authState.collectAsState()
+
+    LaunchedEffect(loginState) {
+        if(loginState is AuthState.Success){
+            navController.navigate(Screen.UserProfile.route)
+        }
+
+    }
 
     Column(
         modifier = Modifier

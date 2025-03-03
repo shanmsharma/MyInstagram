@@ -1,4 +1,4 @@
-package com.sharma.common
+package com.sharma.user
 
 import org.junit.Test
 
